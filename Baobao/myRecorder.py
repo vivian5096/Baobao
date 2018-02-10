@@ -76,7 +76,7 @@ class Recorder(RecorderParent):
          Re-implemented from RecorderParent
         """
 
-        super().__init__(channels = channels,rate = rate,
+        super(Recorder,self).__init__(channels = channels,rate = rate,
              chunk_size = chunk_size,num_chunk = num_chunk)
 
         print('You are using pyAudio for recording')
@@ -96,7 +96,7 @@ class Recorder(RecorderParent):
         """
          Re-implemented from RecorderParent. Prepare the PyAudio Object too.
         """
-        super().open_recorder()
+        super(Recorder,self).open_recorder()
         if self.p == None:
             self.p = pyaudio.PyAudio()
 
@@ -105,7 +105,7 @@ class Recorder(RecorderParent):
         """
          Re-implemented from RecorderParent, but terminate the PyAudio Object too.
         """
-        super().close()
+        super(Recorder,self).close()
         #self.stream_close()
         if not self.p:
             self.p.terminate()

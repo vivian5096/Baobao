@@ -140,8 +140,7 @@ def main(winstyle = 0):
     Baobao=Baby()
     clock = pygame.time.Clock()
 
-    rec = mR.Recorder(num_chunk = 1,
-                      device_name = 'HDA Intel PCH: ALC3236 Analog (hw:1,0)')
+    rec = mR.Recorder(num_chunk = 1)
     rec.stream_init()
     getTicksLastFrame = pygame.time.get_ticks()
     #Game loop
@@ -166,7 +165,7 @@ def main(winstyle = 0):
         #handle player input
         #firing = keystate[K_SPACE]
         audio_data = rec.get_buffer()
-        print(max(abs(audio_data))[0])
+        #print(max(abs(audio_data))[0])
         firing = max(abs(audio_data))> 0.1
 
         if firing:
