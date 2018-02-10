@@ -164,7 +164,7 @@ def main(winstyle = 0):
         keystate = pygame.key.get_pressed()
         #handle player input
         #firing = keystate[K_SPACE]
-        audio_data = rec.get_buffer()
+        audio_data = rec.get_buffer(array = True)
         #print(max(abs(audio_data))[0])
         firing = max(abs(audio_data))> 0.1
 

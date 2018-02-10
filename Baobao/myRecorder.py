@@ -194,6 +194,27 @@ class Recorder(RecorderParent):
         """
         return np.frombuffer(data, dtype = np.int16).reshape((self.chunk_size,self.channels))/ 2**15
 
+    def write_buffer(self,data):
+        if len(self.raw_buffer) == self.num_chunk:
+            self.raw_buffer.pop(0)
+        self.raw_buffer.append(data)
+        data_array = self.audiodata_to_array(data)
+        super(Recorder,self).write_buffer(data_array)
+
+    def get_buffer(self,array = False):
+        if array:
+            super(Recorder,self).get_buffer()
+        else:
+            return (b''.join(self.raw_buffer))
+
+    def allocate_buffer(self):
+        """
+        Set up the circular buffer
+        """
+        super(Recorder,self).allocate_buffer()
+
+        self.raw_buffer = []
+
 #---------------- STREAMING METHODS -----------------------------------
     def stream_audio_callback(self,in_data, frame_count, time_info, status):
         """
@@ -205,8 +226,8 @@ class Recorder(RecorderParent):
         Inputs and Outputs are part of the callback format.
         More info can be found in PyAudio documentation
         """
-        data_array = self.audiodata_to_array(in_data)
-        self.write_buffer(data_array)
+        #data_array = self.audiodata_to_array(in_data)
+        self.write_buffer(in_data)
         #self.rEmitter.newdata.emit()
 
         if self.recording:
