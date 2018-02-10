@@ -32,7 +32,7 @@ Typical example of using the module:
     | >>>recorder.close()
 """
 
-from RecorderParent import RecorderParent
+from .RecorderParent import RecorderParent
 import sys,traceback
 
 try:
@@ -201,11 +201,9 @@ class Recorder(RecorderParent):
         data_array = self.audiodata_to_array(data)
         super(Recorder,self).write_buffer(data_array)
 
-    def get_buffer(self,array = False):
-        if array:
-            super(Recorder,self).get_buffer()
-        else:
-            return (b''.join(self.raw_buffer))
+    def get_buffer(self):
+        data_array = super(Recorder,self).get_buffer()
+        return (data_array, b''.join(self.raw_buffer))
 
     def allocate_buffer(self):
         """

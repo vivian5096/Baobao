@@ -1,14 +1,15 @@
-import myRecorder as mR
+import recorder.myRecorder as mR
 import wave
 import numpy as np
 import speech_recognition as sr
-from preprocesslexicon import lexdict
+
+from lexicons.preprocesslexicon import lexdict
 
 WAVE_OUTPUT_FILENAME = "file1.wav"
 
 def listening(babymem, rec):
     # Save file for analysis later
-    data = rec.get_buffer()
+    _,data = rec.get_buffer()
     #print(rec.get_buffer(True))
     if data == None:
         print('no data')
@@ -53,10 +54,10 @@ def listening(babymem, rec):
     return [speechvalue, babymem]
 
 if  __name__ == "__main__":
-    rec = mR.Recorder(num_chunk = 100)
+    rec = mR.Recorder(num_chunk = 15)
     rec.stream_init()
 
-    for i in range(50):
+    for i in range(10):
         a,b = listening({},rec)
         print(a,b)
 
