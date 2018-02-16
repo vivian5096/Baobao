@@ -1,0 +1,6 @@
+numpy == 1.14.0
+pocketsphinx == 0.1.3
+PyAudio == 0.2.11
+pygame == 1.9.3
+screeninfo == 0.3
+SpeechRecognition == 3.8.1

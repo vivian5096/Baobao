@@ -1,4 +1,4 @@
-lexfile = open('sentiment_lexicon.txt','r')
+lexfile = open('lexicons/sentiment_lexicon.txt','r')
 
 lexdata = lexfile.readlines()
 
@@ -22,4 +22,3 @@ for i in range(len(lexdata)):
     else:
         polarity = -1
     lexdict[word] = [intensity, polarity]
-

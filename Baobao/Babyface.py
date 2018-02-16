@@ -10,7 +10,8 @@ from pygame.locals import *
 #from win32api import GetSystemMetrics
 #from Babyclass import *
 from screeninfo import get_monitors
-import myRecorder as mR
+
+import recorder.myRecorder as mR
 #Get screensize
 #x= GetSystemMetrics(0)*0.8
 #y= int(GetSystemMetrics(1)*0.8)
@@ -164,7 +165,7 @@ def main(winstyle = 0):
         keystate = pygame.key.get_pressed()
         #handle player input
         #firing = keystate[K_SPACE]
-        audio_data = rec.get_buffer(array = True)
+        audio_data,_ = rec.get_buffer()
         #print(max(abs(audio_data))[0])
         firing = max(abs(audio_data))> 0.1
 
